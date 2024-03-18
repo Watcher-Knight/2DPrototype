@@ -16,6 +16,12 @@ public static class ComponentPaths
     public const string Croucher = Movement + "/Croucher";
     #endregion
 
+    #region Menu
+    public const string Menu = Master + "/Menu";
+
+    public const string MenuItem = Menu + "/Menu Item";
+    #endregion
+
     public const string Camera = Master + "/Camera";
 }
 public static class AssetPaths
