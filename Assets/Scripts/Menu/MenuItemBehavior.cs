@@ -1,27 +1,21 @@
 using TMPro;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using UnityEngine.SceneManagement;
 
-[AddComponentMenu(ComponentPaths.MenuItem)]
-public class MenuItemBehavior : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
+public abstract class MenuItemBehavior : MonoBehaviour, IPointerClickHandler, IPointerEnterHandler, IPointerExitHandler
 {
-    [SerializeField] private Color DefaultColor;
+    private Color DefaultColor;
     [SerializeField] private Color SelectColor;
-    [SerializeField] private string SceneName;
 
     private TextMeshProUGUI b_Text;
     private TextMeshProUGUI Text => b_Text ??= GetComponent<TextMeshProUGUI>();
 
-    private void Start()
+    private void Awake()
     {
-        Text.color = DefaultColor;
+        DefaultColor = Text.color;
     }
 
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        SceneManager.LoadScene(SceneName);
-    }
+    public void OnPointerClick(PointerEventData eventData) => OnClick();
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -32,4 +26,6 @@ public class MenuItemBehavior : MonoBehaviour, IPointerClickHandler, IPointerEnt
     {
         Text.color = DefaultColor;
     }
+
+    public abstract void OnClick();
 }

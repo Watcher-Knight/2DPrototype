@@ -4,16 +4,21 @@ using UnityEngine;
 [RequireComponent(typeof(Camera))]
 public class CameraBehavior : MonoBehaviour
 {
-    [SerializeField] private float MinWidth = 28;
-    [SerializeField] private float MinHeight = 18;
+    [SerializeField] private Vector2 MinBounds = new(28, 18);
 
     private void Update()
     {
         Camera camera = GetComponent<Camera>();
 
-        float orthographicWidth = MinWidth * camera.pixelHeight / camera.pixelWidth;
-        float size = Mathf.Max(orthographicWidth, MinHeight) * 0.5f;
+        float orthographicWidth = MinBounds.x * camera.pixelHeight / camera.pixelWidth;
+        float size = Mathf.Max(orthographicWidth, MinBounds.y) * 0.5f;
 
         camera.orthographicSize = size;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireCube(transform.position, MinBounds);
     }
 }

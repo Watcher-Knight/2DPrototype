@@ -22,12 +22,6 @@ public class MovementStateMachine
     }
     public Action<MovementState> OnStateChange;
 
-    public MovementStateMachine(JumperBehavior jumper, CroucherBehavior croucher)
-    {
-        jumper.OnFinish = ToDefault;
-        croucher.OnFinish = ToDefault;
-    }
-
     public bool ToJump(BoxCollider2D collider, LayerMask platformLayer)
     {
         switch (CurrentState)
@@ -56,13 +50,25 @@ public class MovementStateMachine
         }
         return false;
     }
+    public bool ToGrapple()
+    {
+        switch (CurrentState)
+        {
+            case MovementState.Default:
+            case MovementState.Jump:
+                CurrentState = MovementState.Grapple;
+                return true;
+        }
+        return false;
+    }
 
-    private void ToDefault() => CurrentState = MovementState.Default;
+    public void ToDefault() => CurrentState = MovementState.Default;
 }
 
 public enum MovementState
 {
     Default,
     Jump,
-    Crouch
+    Crouch,
+    Grapple
 }

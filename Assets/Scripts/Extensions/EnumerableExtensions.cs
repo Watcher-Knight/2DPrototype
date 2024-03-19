@@ -35,4 +35,14 @@ public static class EnumerableExtensions
         if (index != source.Count()) return index;
         throw new IndexOutOfRangeException();
     }
+
+    public static SerializableEnumerable<T> Serializable<T>(this IEnumerable<T> enumerable) => new(enumerable);
+}
+
+[Serializable]
+public struct SerializableEnumerable<T>
+{
+    private List<T> Items;
+    public SerializableEnumerable(IEnumerable<T> enumerable) => Items = new List<T>(enumerable);
+    public IEnumerable<T> ToEnumerable() => Items;
 }

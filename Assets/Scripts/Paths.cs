@@ -14,12 +14,14 @@ public static class ComponentPaths
     public const string Mover = Movement + "/Mover";
     public const string Jumper = Movement + "/Jumper";
     public const string Croucher = Movement + "/Croucher";
+    public const string Grappler = Movement + "/Grappler";
     #endregion
 
     #region Menu
     public const string Menu = Master + "/Menu";
 
-    public const string MenuItem = Menu + "/Menu Item";
+    public const string SceneMenuItem = Menu + "/Scene Menu Item";
+    public const string ExitMenuItem = Menu + "/Exit Menu Item";
     #endregion
 
     public const string Camera = Master + "/Camera";
