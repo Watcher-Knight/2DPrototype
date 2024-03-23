@@ -61,4 +61,12 @@ public static class Collider2DExtensions
 
         return colliders.Length > 0;
     }
+
+
+    public static Collider2D[] OverlapCollider(this Collider2D collider, ContactFilter2D contactFilter)
+    {
+        List<Collider2D> results = new();
+        collider.OverlapCollider(contactFilter, results);
+        return results.ToArray();
+    }
 }

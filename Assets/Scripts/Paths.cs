@@ -17,6 +17,8 @@ public static class ComponentPaths
     public const string Grappler = Movement + "/Grappler";
     #endregion
 
+    public const string Targeter = Movement + "/Targeter";
+
     #region Menu
     public const string Menu = Master + "/Menu";
 
@@ -25,6 +27,7 @@ public static class ComponentPaths
     #endregion
 
     public const string Camera = Master + "/Camera";
+    public const string GrapplePoint = Master + "/GrapplePoint";
 }
 public static class AssetPaths
 {
@@ -34,5 +37,6 @@ public static class AssetPaths
     public const string MoverData = Data + "/Mover";
     public const string JumperData = Data + "/Jumper";
     public const string CroucherData = Data + "/Croucher";
+    public const string TargeterData = Data + "/Targeter";
     #endregion
 }

@@ -50,14 +50,18 @@ public class MovementStateMachine
         }
         return false;
     }
-    public bool ToGrapple()
+    public bool ToGrapple(TargeterBehavior targeter)
     {
         switch (CurrentState)
         {
             case MovementState.Default:
             case MovementState.Jump:
-                CurrentState = MovementState.Grapple;
-                return true;
+                if (targeter.Target != null)
+                {
+                    CurrentState = MovementState.Grapple;
+                    return true;
+                }
+                break;
         }
         return false;
     }

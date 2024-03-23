@@ -6,6 +6,8 @@ public class ExitMenuBehavior : MenuItemBehavior
     public override void OnClick()
     {
         Application.Quit();
-        Debug.Log("Quitting");
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.ExitPlaymode();
+#endif
     }
 }

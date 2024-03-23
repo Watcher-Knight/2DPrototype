@@ -6,6 +6,13 @@ using UnityEngine;
 public class MoverBehavior : MonoBehaviour
 {
     [SerializeField] private MoverData Data;
+    private float b_Control = 1;
+    public float Control
+    {
+        get => b_Control;
+        set => b_Control = Mathf.Clamp01(value);
+    }
+    
 
     private Rigidbody2D Rigidbody;
     private float Direction { get; set; } = 0f;
@@ -23,7 +30,7 @@ public class MoverBehavior : MonoBehaviour
         float speedDifference = targetSpeed - Rigidbody.velocity.x;
         float accelerationPercent = (Mathf.Abs(targetSpeed) > 0) ? Data.Acceleration : Data.Deceleration;
         float accelerationRate = accelerationPercent / Time.fixedDeltaTime;
-        float force = speedDifference * accelerationRate;
+        float force = speedDifference * accelerationRate * Control;
         Rigidbody.AddForce(Vector2.right * force);
     }
 }
