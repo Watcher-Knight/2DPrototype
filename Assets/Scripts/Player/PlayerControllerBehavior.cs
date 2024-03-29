@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 [UpdateEditor]
 [SelectionBase]
@@ -7,68 +6,94 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(JumperBehavior))]
 [RequireComponent(typeof(CroucherBehavior))]
 [RequireComponent(typeof(GrapplerBehavior))]
-[RequireComponent(typeof(TargeterBehavior))]
+//[RequireComponent(typeof(TargeterBehavior))]
 [AddComponentMenu(ComponentPaths.PlayerController)]
-public class PlayerControllerBehavior : MonoBehaviour, IEventListener
+public class PlayerControllerBehavior : MonoBehaviour
 {
     [SerializeField] BoxCollider2D Collider;
     [SerializeField] LayerMask PlatformLayer;
     [SerializeField] EventTag ExitTag;
-    [SerializeField] string Menu = "Menu";
     [DisplayPlayMode] MovementState CurrentState => StateMachine.CurrentState;
     private MovementStateMachine StateMachine;
+    private GameInput.PlayerActions Controls;
 
     private void OnEnable()
     {
         StateMachine = new();
         InitializeControls();
     }
+    private void OnDisable()
+    {
+        Controls.Disable();
+    }
     private void InitializeControls()
     {
-        GameInput.PlayerActions controls = new GameInput().Player;
-        controls.Enable();
+        Controls = new GameInput().Player;
+        Controls.Enable();
 
         MoverBehavior mover = GetComponent<MoverBehavior>();
-        controls.Move.performed += c => { if (StateMachine.CanMove) mover.Move(c.ReadValue<float>()); };
-        controls.Move.canceled += c => mover.Move(0f);
+        Controls.Move.performed += c => { if (StateMachine.CanMove) mover.Move(c.ReadValue<float>()); };
+        Controls.Move.canceled += c => mover.Move(0f);
         StateMachine.OnStateChange += s => { if (s == MovementState.Crouch) mover.Move(0f); };
 
         JumperBehavior jumper = GetComponent<JumperBehavior>();
-        controls.Jump.performed += c => { if (StateMachine.ToJump(Collider, PlatformLayer)) jumper.Jump(); };
-        controls.Jump.canceled += c => jumper.Cancel();
+        Controls.Jump.performed += c => { if (StateMachine.ToJump(Collider, PlatformLayer)) jumper.Jump(); };
+        Controls.Jump.canceled += c => jumper.Cancel();
         jumper.OnFinish += StateMachine.ToDefault;
 
         CroucherBehavior croucher = GetComponent<CroucherBehavior>();
-        controls.Crouch.performed += c => { if (StateMachine.ToCrouch(Collider, PlatformLayer)) croucher.Crouch(); };
-        controls.Crouch.canceled += c => croucher.Cancel();
+        Controls.Crouch.performed += c => { if (StateMachine.ToCrouch(Collider, PlatformLayer)) croucher.Crouch(); };
+        Controls.Crouch.canceled += c => croucher.Cancel();
         croucher.OnFinish += StateMachine.ToDefault;
 
-        TargeterBehavior targeter = GetComponent<TargeterBehavior>();
-        controls.Aim.performed += c => targeter.Aim(c.ReadValue<Vector2>());
-        controls.Aim.canceled += c => targeter.Aim(Vector2.zero);
-
         GrapplerBehavior grappler = GetComponent<GrapplerBehavior>();
-        controls.Grapple.performed += c =>
+        Controls.Grapple.performed += c =>
         {
-            if (StateMachine.ToGrapple(targeter))
+            if (grappler.CanGrapple && StateMachine.ToGrapple())
             {
-                grappler.Grapple(targeter.Target.transform.position);
+                grappler.Grapple();
                 mover.Control = 0f;
             }
         };
-        controls.Grapple.canceled += c =>
+        Controls.Grapple.canceled += c =>
         {
             grappler.Cancel();
+        };
+        Controls.Aim.performed += c => grappler.Aim(c.ReadValue<Vector2>());
+        Controls.Aim.canceled += c => grappler.Aim(Vector2.zero);
+        grappler.OnFinish += () =>
+        {
+            StateMachine.ToDefault();
             mover.Control = 1f;
         };
-        grappler.OnFinish += StateMachine.ToDefault;
+        StateMachine.OnStateChange += s =>
+        {
+            if (s == MovementState.Grapple)
+            {
+                Controls.Move.performed += c => grappler.Swing(c.ReadValue<float>());
+                Controls.Move.canceled += c => grappler.Swing(0f);
+                Controls.Climb.performed += c => grappler.Climb(c.ReadValue<float>());
+                Controls.Climb.canceled += c => grappler.Climb(0f);
+                Controls.Jump.performed += c => grappler.Cancel();
+            }
+            else
+            {
+                Controls.Move.performed -= c => grappler.Swing(c.ReadValue<float>());
+                Controls.Move.canceled -= c => grappler.Swing(0f);
+                Controls.Climb.performed -= c => grappler.Climb(c.ReadValue<float>());
+                Controls.Climb.canceled -= c => grappler.Climb(0f);
+                Controls.Jump.performed -= c => grappler.Cancel();
+            }
+        };
     }
 
-    public void Invoke(EventTag tag)
+    private void SetMoveControl(float value, float speed)
     {
-        if (tag == ExitTag)
-        {
-            SceneManager.LoadScene(Menu);
-        }
+
+    }
+
+    private void Update()
+    {
+
     }
 }

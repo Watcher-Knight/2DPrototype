@@ -26,15 +26,4 @@ public static class GameObjectExtensions
         rigidbody.gravityScale = 0;
         return rigidbody;
     }
-
-    public static void SendMessage(this GameObject gameObject, EventTag tag)
-    {
-        IEventListener[] listeners = gameObject.GetComponents<IEventListener>();
-        foreach (IEventListener listener in listeners) listener.Invoke(tag);
-    }
-    public static void SendMessage<T>(this GameObject gameObject, EventTag tag, T arg)
-    {
-        IEventListener<T>[] listeners = gameObject.GetComponents<IEventListener<T>>();
-        foreach (IEventListener<T> listener in listeners) listener.Invoke(tag, arg);
-    }
 }

@@ -38,6 +38,12 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Rope
+    uniqueID: 2334883705
+    locked: 0
+  - name: Player
+    uniqueID: 2072179431
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

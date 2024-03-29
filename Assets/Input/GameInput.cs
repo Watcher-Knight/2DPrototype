@@ -71,6 +71,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Climb"",
+                    ""type"": ""Value"",
+                    ""id"": ""eb9cbd7f-1a05-49b1-8658-17bdf9bb7306"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -271,6 +280,72 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Aim"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""22604ab9-a8dd-4384-9c92-92bf74ed2259"",
+                    ""path"": ""<Gamepad>/dpad"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Aim"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3f9c2426-feac-4f2a-b9e9-940a52b43413"",
+                    ""path"": ""<Gamepad>/dpad/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Climb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""2759a3fc-d0b0-4301-804a-1b773212af3b"",
+                    ""path"": ""<Gamepad>/leftStick/y"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Climb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""bddd2ba3-c73b-4507-8dd8-f8ddcaa216e9"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Climb"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""265d2109-34d7-4e53-87c1-00fc2a74bd7e"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Climb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""positive"",
+                    ""id"": ""89605d0c-9ef9-4fde-b5c6-343be420fc6a"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Climb"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -284,6 +359,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_Crouch = m_Player.FindAction("Crouch", throwIfNotFound: true);
         m_Player_Grapple = m_Player.FindAction("Grapple", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
+        m_Player_Climb = m_Player.FindAction("Climb", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -350,6 +426,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Crouch;
     private readonly InputAction m_Player_Grapple;
     private readonly InputAction m_Player_Aim;
+    private readonly InputAction m_Player_Climb;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
@@ -359,6 +436,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Crouch => m_Wrapper.m_Player_Crouch;
         public InputAction @Grapple => m_Wrapper.m_Player_Grapple;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
+        public InputAction @Climb => m_Wrapper.m_Player_Climb;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -383,6 +461,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Aim.started += instance.OnAim;
             @Aim.performed += instance.OnAim;
             @Aim.canceled += instance.OnAim;
+            @Climb.started += instance.OnClimb;
+            @Climb.performed += instance.OnClimb;
+            @Climb.canceled += instance.OnClimb;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -402,6 +483,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Aim.started -= instance.OnAim;
             @Aim.performed -= instance.OnAim;
             @Aim.canceled -= instance.OnAim;
+            @Climb.started -= instance.OnClimb;
+            @Climb.performed -= instance.OnClimb;
+            @Climb.canceled -= instance.OnClimb;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -426,5 +510,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnCrouch(InputAction.CallbackContext context);
         void OnGrapple(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
+        void OnClimb(InputAction.CallbackContext context);
     }
 }

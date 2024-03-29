@@ -9,7 +9,7 @@ public class MovementStateMachine
         _ => true
     };
     private bool IsGrounded(BoxCollider2D collider, LayerMask platformLayer) =>
-        collider.IsTouching(Direction.Down, platformLayer);
+        collider.IsTouching(Vector2.down, platformLayer);
     private MovementState b_CurrentSTate = MovementState.Default;
     public MovementState CurrentState
     {
@@ -33,6 +33,9 @@ public class MovementStateMachine
                     return true;
                 }
                 break;
+            case MovementState.Grapple:
+                CurrentState = MovementState.Jump;
+                return true;
         }
         return false;
     }
@@ -50,18 +53,14 @@ public class MovementStateMachine
         }
         return false;
     }
-    public bool ToGrapple(TargeterBehavior targeter)
+    public bool ToGrapple()
     {
         switch (CurrentState)
         {
             case MovementState.Default:
             case MovementState.Jump:
-                if (targeter.Target != null)
-                {
-                    CurrentState = MovementState.Grapple;
-                    return true;
-                }
-                break;
+                CurrentState = MovementState.Grapple;
+                return true;
         }
         return false;
     }

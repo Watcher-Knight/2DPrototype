@@ -13,9 +13,4 @@ public static class ComponentExtensions
         component.gameObject.AddComponent<T>();
     public static Rigidbody2D AddRigidbody2D(this Component component, float gravityScale = 0) =>
         component.gameObject.AddRigidbody2D(gravityScale);
-
-    public static void SendMessage(this Component component, EventTag tag) =>
-        component.gameObject.SendMessage(tag);
-    public static void SendMessage<T>(this Component component, EventTag tag, T arg) =>
-        component.gameObject.SendMessage(tag, arg);
 }

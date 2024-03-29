@@ -16,7 +16,7 @@ public class CameraBehavior : MonoBehaviour
         camera.orthographicSize = size;
     }
 
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireCube(transform.position, MinBounds);
