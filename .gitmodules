@@ -1,0 +1,3 @@
+[submodule "Assets/Plugins/UnityEvents"]
+	path = Assets/Plugins/UnityEvents
+	url = https://github.com/Watcher-Knight/UnityEvents.git
