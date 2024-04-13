@@ -44,7 +44,7 @@ public class GrapplerBehavior : MonoBehaviour
     {
         if (IsGrappling)
         {
-            UpdateClimb();
+            if (SwingDirection == 0) UpdateClimb();
             DrawLine();
         }
         CalculateTarget();
@@ -124,7 +124,7 @@ public class GrapplerBehavior : MonoBehaviour
     {
         AimDirection = direction;
     }
-    private void OnDrawGizmos()
+    private void OnDrawGizmosSelected()
     {
         if (Data == null) return;
         Gizmos.color = Color.green;

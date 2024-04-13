@@ -14,4 +14,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Grapple1.unity
     guid: 18501506a56d7394dae4b041e3dec824
+  - enabled: 1
+    path: Assets/Scenes/Magnet1.unity
+    guid: 7c82ba297e5f8854eac1c484935187ed
   m_configObjects: {}

@@ -16,6 +16,7 @@ public static class ComponentPaths
     public const string Jumper = Movement + "/Jumper";
     public const string Croucher = Movement + "/Croucher";
     public const string Grappler = Movement + "/Grappler";
+    public const string Magnet = Movement + "/Magnet";
     #endregion
 
     #region Menu
@@ -37,6 +38,7 @@ public static class AssetPaths
     public const string JumperData = Data + "/Jumper";
     public const string CroucherData = Data + "/Croucher";
     public const string GrapplerData = Data + "/Grappler";
+    public const string MagnetData = Data + "/Magnet";
     public const string PlayerEventHandlerData = Data + "/Player Event Handler";
     #endregion
 }

@@ -1,15 +1,12 @@
-[submodule "Assets/Plugins/UnityEvents"]
+[submodule "Assets/Plugins/Events"]
 	path = Assets/Plugins/UnityEvents
 	url = https://github.com/Watcher-Knight/UnityEvents.git
-[submodule "Assets/Plugins/UnityScenes"]
+[submodule "Assets/Plugins/Scenes"]
 	path = Assets/Plugins/UnityScenes
 	url = https://github.com/Watcher-Knight/UnityScenes.git
-[submodule "Assets/Plugins/UnityInspectorUpgrade"]
+[submodule "Assets/Plugins/InspectorUpgrade"]
 	path = Assets/Plugins/UnityInspectorUpgrade
 	url = https://github.com/Watcher-Knight/UnityInspectorUpgrade.git
-[submodule "Assets/Plugins/UnityAnimation"]
+[submodule "Assets/Plugins/Animation"]
 	path = Assets/Plugins/UnityAnimation
 	url = https://github.com/Watcher-Knight/UnityAnimation.git
-[submodule "Assets/Plugins/CSharpLinqExtensions"]
-	path = Assets/Plugins/CSharpLinqExtensions
-	url = https://github.com/Watcher-Knight/CSharpLinqExtensions.git

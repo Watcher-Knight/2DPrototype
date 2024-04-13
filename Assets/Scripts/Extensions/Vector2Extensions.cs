@@ -35,4 +35,10 @@ public static class Vector2Extensions
         Quaternion rotation = Quaternion.Euler(0, 0, -degrees);
         return rotation * vector;
     }
+
+    public static float DirectionalMagnitude(this Vector2 vector, Vector2 direction)
+    {
+        float dot = Vector2.Dot(vector.normalized, direction.normalized);
+        return vector.magnitude * dot;
+    }
 }

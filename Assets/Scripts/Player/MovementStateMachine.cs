@@ -6,6 +6,8 @@ public class MovementStateMachine
     public bool CanMove => CurrentState switch
     {
         MovementState.Crouch => false,
+        MovementState.Grapple => false,
+        MovementState.Magnet => false,
         _ => true
     };
     private bool IsGrounded(BoxCollider2D collider, LayerMask platformLayer) =>
@@ -64,6 +66,17 @@ public class MovementStateMachine
         }
         return false;
     }
+    public bool ToMagnet()
+    {
+        switch (CurrentState)
+        {
+            case MovementState.Default:
+            case MovementState.Jump:
+                CurrentState = MovementState.Magnet;
+                return true;
+        }
+        return false;
+    }
 
     public void ToDefault() => CurrentState = MovementState.Default;
 }
@@ -73,5 +86,6 @@ public enum MovementState
     Default,
     Jump,
     Crouch,
-    Grapple
+    Grapple,
+    Magnet
 }

@@ -80,6 +80,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Magnet"",
+                    ""type"": ""Button"",
+                    ""id"": ""2536bce9-022a-4cf7-9dde-4a8a7f465442"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -196,7 +205,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""aafc8a9d-500a-483d-910f-35e55d636524"",
-                    ""path"": ""<Keyboard>/e"",
+                    ""path"": ""<Keyboard>/n"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -346,6 +355,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Climb"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ce2a0a65-4a4b-4e15-905c-25719a72562b"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magnet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""41812d6d-59ec-4ca6-a311-eb256c3bb6b8"",
+                    ""path"": ""<Keyboard>/m"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Magnet"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -360,6 +391,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_Grapple = m_Player.FindAction("Grapple", throwIfNotFound: true);
         m_Player_Aim = m_Player.FindAction("Aim", throwIfNotFound: true);
         m_Player_Climb = m_Player.FindAction("Climb", throwIfNotFound: true);
+        m_Player_Magnet = m_Player.FindAction("Magnet", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -427,6 +459,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Grapple;
     private readonly InputAction m_Player_Aim;
     private readonly InputAction m_Player_Climb;
+    private readonly InputAction m_Player_Magnet;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
@@ -437,6 +470,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Grapple => m_Wrapper.m_Player_Grapple;
         public InputAction @Aim => m_Wrapper.m_Player_Aim;
         public InputAction @Climb => m_Wrapper.m_Player_Climb;
+        public InputAction @Magnet => m_Wrapper.m_Player_Magnet;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -464,6 +498,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Climb.started += instance.OnClimb;
             @Climb.performed += instance.OnClimb;
             @Climb.canceled += instance.OnClimb;
+            @Magnet.started += instance.OnMagnet;
+            @Magnet.performed += instance.OnMagnet;
+            @Magnet.canceled += instance.OnMagnet;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -486,6 +523,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Climb.started -= instance.OnClimb;
             @Climb.performed -= instance.OnClimb;
             @Climb.canceled -= instance.OnClimb;
+            @Magnet.started -= instance.OnMagnet;
+            @Magnet.performed -= instance.OnMagnet;
+            @Magnet.canceled -= instance.OnMagnet;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -511,5 +551,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnGrapple(InputAction.CallbackContext context);
         void OnAim(InputAction.CallbackContext context);
         void OnClimb(InputAction.CallbackContext context);
+        void OnMagnet(InputAction.CallbackContext context);
     }
 }

@@ -12,25 +12,27 @@ public class MoverBehavior : MonoBehaviour
         get => b_Control;
         set => b_Control = Mathf.Clamp01(value);
     }
-    
 
-    private Rigidbody2D Rigidbody;
+    private Mover Mover;
+    //private Rigidbody2D Rigidbody;
     private float Direction { get; set; } = 0f;
 
     private void OnEnable()
     {
-        Rigidbody = GetComponent<Rigidbody2D>();
+        //Rigidbody = GetComponent<Rigidbody2D>();
+        Mover = new()
+        {
+            Rigidbody = GetComponent<Rigidbody2D>(),
+            Speed = Data.Speed,
+            Acceleration = Data.Acceleration,
+            Deceleration = Data.Deceleration
+        };
     }
 
     public void Move(float value) => Direction = value;
 
     private void FixedUpdate()
     {
-        float targetSpeed = Math.Sign(Direction) * Data.Speed;
-        float speedDifference = targetSpeed - Rigidbody.velocity.x;
-        float accelerationPercent = (Mathf.Abs(targetSpeed) > 0) ? Data.Acceleration : Data.Deceleration;
-        float accelerationRate = accelerationPercent / Time.fixedDeltaTime;
-        float force = speedDifference * accelerationRate * Control;
-        Rigidbody.AddForce(Vector2.right * force);
+        Mover.Move(Direction, Control);
     }
 }

@@ -1,0 +1,22 @@
+{
+    "name": "2DPrototype",
+    "rootNamespace": "",
+    "references": [
+        "GUID:9aaea74e61777894e8ff8bedfd2aaa99",
+        "GUID:737e7663002eeb24a97cf3ce5ad6adeb",
+        "GUID:b6053e56434a6394cb535d261dadd578",
+        "GUID:b8136ad175cf09a4ca0ff645921b681e",
+        "GUID:c52133ebb8098d74a8ef0c9aee1ae818",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

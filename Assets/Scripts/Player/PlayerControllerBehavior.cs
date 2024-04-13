@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [UpdateEditor]
@@ -6,7 +7,7 @@ using UnityEngine;
 [RequireComponent(typeof(JumperBehavior))]
 [RequireComponent(typeof(CroucherBehavior))]
 [RequireComponent(typeof(GrapplerBehavior))]
-//[RequireComponent(typeof(TargeterBehavior))]
+[RequireComponent(typeof(MagnetBehavior))]
 [AddComponentMenu(ComponentPaths.PlayerController)]
 public class PlayerControllerBehavior : MonoBehaviour
 {
@@ -85,15 +86,57 @@ public class PlayerControllerBehavior : MonoBehaviour
                 Controls.Jump.performed -= c => grappler.Cancel();
             }
         };
+
+        MagnetBehavior magnet = GetComponent<MagnetBehavior>();
+        Controls.Magnet.performed += c =>
+        {
+            if (magnet.CanMagnetize && StateMachine.ToMagnet())
+            {
+                magnet.Pull();
+                SetControl(mover, 0f, 0f);
+            }
+        };
+        Controls.Magnet.canceled += c => magnet.Release();
+        Controls.Aim.performed += c => magnet.Aim(c.ReadValue<Vector2>());
+        Controls.Aim.canceled += c => magnet.Aim(Vector2.zero);
+        magnet.OnFinish += () =>
+        {
+            StateMachine.ToDefault();
+            SetControl(mover, 1f, 0f);
+        };
+        StateMachine.OnStateChange += s =>
+        {
+            if (s == MovementState.Magnet)
+            {
+                Controls.Move.performed += c => magnet.Slide(c.ReadValue<float>());
+                Controls.Move.canceled += c => magnet.Slide(0f);
+            }
+            else
+            {
+                Controls.Move.performed -= c => magnet.Slide(c.ReadValue<float>());
+                Controls.Move.canceled -= c => magnet.Slide(0f);
+            }
+        };
     }
 
-    private void SetMoveControl(float value, float speed)
+    private void SetControl(MoverBehavior mover, float value, float time)
     {
-
+        StopCoroutine(ControlSetRoutine(mover, value, time));
+        StartCoroutine(ControlSetRoutine(mover, value, time));
     }
 
-    private void Update()
+    private IEnumerator ControlSetRoutine(MoverBehavior mover, float value, float time)
     {
-
+        if (time == 0f) 
+        {
+            mover.Control = value;
+            yield break;
+        }
+        float speed = (mover.Control - value) / 2;
+        while (mover.Control != value)
+        {
+            mover.Control = Mathf.MoveTowards(mover.Control, value, speed * Time.deltaTime);
+            yield return null;
+        }
     }
 }
