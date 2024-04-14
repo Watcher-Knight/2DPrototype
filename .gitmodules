@@ -10,3 +10,12 @@
 [submodule "Assets/Plugins/Animation"]
 	path = Assets/Plugins/UnityAnimation
 	url = https://github.com/Watcher-Knight/UnityAnimation.git
+[submodule "Assets/Plugins/CSharpStringFormatter"]
+	path = Assets/Plugins/CSharpStringFormatter
+	url = https://github.com/Watcher-Knight/CSharpStringFormatter.git
+[submodule "Assets/Plugins/LinqExtensions"]
+	path = Assets/Plugins/LinqExtensions
+	url = https://github.com/Watcher-Knight/CSharpLinqExtensions.git
+[submodule "Assets/Plugins/ObjectExtensions"]
+	path = Assets/Plugins/ObjectExtensions
+	url = https://github.com/Watcher-Knight/UnityObjectExtensions.git
