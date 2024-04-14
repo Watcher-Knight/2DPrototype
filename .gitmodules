@@ -2,16 +2,16 @@
 	path = Assets/Plugins/UnityEvents
 	url = https://github.com/Watcher-Knight/UnityEvents.git
 [submodule "Assets/Plugins/Scenes"]
-	path = Assets/Plugins/UnityScenes
+	path = Assets/Plugins/Scenes
 	url = https://github.com/Watcher-Knight/UnityScenes.git
 [submodule "Assets/Plugins/InspectorUpgrade"]
-	path = Assets/Plugins/UnityInspectorUpgrade
+	path = Assets/Plugins/InspectorUpgrade
 	url = https://github.com/Watcher-Knight/UnityInspectorUpgrade.git
 [submodule "Assets/Plugins/Animation"]
-	path = Assets/Plugins/UnityAnimation
+	path = Assets/Plugins/Animation
 	url = https://github.com/Watcher-Knight/UnityAnimation.git
 [submodule "Assets/Plugins/CSharpStringFormatter"]
-	path = Assets/Plugins/CSharpStringFormatter
+	path = Assets/Plugins/StringFormatter
 	url = https://github.com/Watcher-Knight/CSharpStringFormatter.git
 [submodule "Assets/Plugins/LinqExtensions"]
 	path = Assets/Plugins/LinqExtensions
