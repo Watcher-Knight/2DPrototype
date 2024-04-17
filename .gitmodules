@@ -1,5 +1,5 @@
 [submodule "Assets/Plugins/Events"]
-	path = Assets/Plugins/UnityEvents
+	path = Assets/Plugins/Events
 	url = https://github.com/Watcher-Knight/UnityEvents.git
 [submodule "Assets/Plugins/Scenes"]
 	path = Assets/Plugins/Scenes
