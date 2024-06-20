@@ -19,3 +19,6 @@
 [submodule "Assets/Plugins/ObjectExtensions"]
 	path = Assets/Plugins/ObjectExtensions
 	url = https://github.com/Watcher-Knight/UnityObjectExtensions.git
+[submodule "Assets/Plugins/WebManager"]
+	path = Assets/Plugins/WebManager
+	url = https://github.com/Watcher-Knight/UnityWebManager.git
