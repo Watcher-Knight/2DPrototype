@@ -18,8 +18,8 @@ public class GrapplePointBehavior : MonoBehaviour, IEventListener
 
     public void Invoke(EventTag tag)
     {
-        if (tag == SelectionTag) Select();
-        if (tag == DeselectionTag) Deselect();
+        // if (tag == SelectionTag) Select();
+        // if (tag == DeselectionTag) Deselect();
     }
 
     private void Select() => Renderer.color = SelectColor;

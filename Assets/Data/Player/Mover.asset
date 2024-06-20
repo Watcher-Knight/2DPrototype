@@ -15,3 +15,4 @@ MonoBehaviour:
   <Speed>k__BackingField: 10
   <Acceleration>k__BackingField: 0.75
   <Deceleration>k__BackingField: 0.75
+  <RegainControlStrength>k__BackingField: 3.3

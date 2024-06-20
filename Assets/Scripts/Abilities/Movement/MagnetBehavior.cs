@@ -17,14 +17,7 @@ public class MagnetBehavior : MonoBehaviour
 
     public bool CanMagnetize => !IsMagnetized && TargetCollider != null;
 
-    private void ChangeTarget(Collider2D newTarget)
-    {
-        TargetCollider?.SendMessage(Data.DeselectionTag);
-        TargetCollider = newTarget;
-        TargetCollider?.SendMessage(Data.SelectionTag);
-    }
-
-    private void OnEnable()
+    private void Awake()
     {
         DefaultGravity = Rigidbody.gravityScale;
         Mover = new()
@@ -49,6 +42,8 @@ public class MagnetBehavior : MonoBehaviour
     }
     private void OnCollisionEnter2D(Collision2D other)
     {
+        if (TargetCollider == null) return;
+        if (other.gameObject != TargetCollider.gameObject) return;
         Mover.Axis = -Vector2.Perpendicular(other.GetContact(0).normal);
     }
 
@@ -58,9 +53,15 @@ public class MagnetBehavior : MonoBehaviour
         if (AimDirection != Vector2.zero)
         {
             RaycastHit2D hit = Physics2D.Raycast(transform.position, AimDirection, Data.Range, Data.MagnetLayer);
-            newCollider = hit.collider;
+            if (hit && hit.collider.TryGetComponent(out MagnetableBehavior m))
+                newCollider = hit.collider;
         }
-        if (TargetCollider != newCollider) ChangeTarget(newCollider);
+        if (TargetCollider != newCollider)
+        {
+            TargetCollider?.GetComponent<MagnetableBehavior>().Deselect();
+            TargetCollider = newCollider;
+            TargetCollider?.GetComponent<MagnetableBehavior>().Select();
+        }
     }
     private void MoveAlong()
     {
@@ -68,7 +69,7 @@ public class MagnetBehavior : MonoBehaviour
     }
     private void MoveTowards()
     {
-        Rigidbody.AddForce((TargetCollider.ClosestPoint(transform.position) - (Vector2) transform.position).normalized * Data.Force, ForceMode2D.Force);
+        Rigidbody.AddForce((TargetCollider.ClosestPoint(transform.position) - (Vector2)transform.position).normalized * Data.Force);
     }
 
 
@@ -85,6 +86,7 @@ public class MagnetBehavior : MonoBehaviour
 
         IsMagnetized = false;
         Rigidbody.gravityScale = DefaultGravity;
+        MoveDirection = 0;
         OnFinish?.Invoke();
     }
     public void Slide(float direction)

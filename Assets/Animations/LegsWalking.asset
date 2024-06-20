@@ -1,0 +1,26 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb5f8d3ab96c94145829353e0561c525, type: 3}
+  m_Name: LegsWalking
+  m_EditorClassIdentifier: 
+  sprites:
+  - {fileID: 430666220, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: 843167745, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: 410257016, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: 1789975200, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: -1120434057, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: -814508553, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: -1377620089, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: 1029367356, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: -1325579272, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  - {fileID: 1757853129, guid: a6996dd13d09c4a46a4d4a42fe939132, type: 3}
+  <Repeat>k__BackingField: 1

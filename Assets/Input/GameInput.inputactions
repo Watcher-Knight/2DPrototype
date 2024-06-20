@@ -9,7 +9,7 @@
                     "name": "Move",
                     "type": "Value",
                     "id": "7ab2a138-48ab-432c-900b-c8519ffb06c8",
-                    "expectedControlType": "Axis",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -27,15 +27,6 @@
                     "name": "Crouch",
                     "type": "Button",
                     "id": "bb11852d-e4fe-4561-8072-f442a64fa25d",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Grapple",
-                    "type": "Button",
-                    "id": "86f8b457-e34a-4707-99b6-51ecd27911aa",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -60,9 +51,27 @@
                     "initialStateCheck": true
                 },
                 {
+                    "name": "Shoot",
+                    "type": "Button",
+                    "id": "7568e0bd-8b24-4937-9ad5-fa13c059b475",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Grapple",
+                    "type": "Button",
+                    "id": "deb144d3-8824-4862-acc4-75916e436c6d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
                     "name": "Magnet",
                     "type": "Button",
-                    "id": "2536bce9-022a-4cf7-9dde-4a8a7f465442",
+                    "id": "86f8b457-e34a-4707-99b6-51ecd27911aa",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -73,7 +82,7 @@
                 {
                     "name": "",
                     "id": "bdc2178b-e922-4bf1-8d15-073d6fd75d7d",
-                    "path": "<Gamepad>/dpad/x",
+                    "path": "<Gamepad>/dpad",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -84,7 +93,7 @@
                 {
                     "name": "",
                     "id": "29419f60-691b-46ef-8a2d-8a0964e234f2",
-                    "path": "<Gamepad>/leftStick/x",
+                    "path": "<Gamepad>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -93,9 +102,9 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "Arrow Keys",
-                    "id": "2dd4eb2d-ae47-4473-8410-2c044be9ba5d",
-                    "path": "1DAxis",
+                    "name": "WASD",
+                    "id": "0c0fbff2-ff2a-4308-bac0-1574132dd703",
+                    "path": "2DVector",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -104,8 +113,30 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "negative",
-                    "id": "84bfe2f9-09f3-4f3d-b537-79c0f50d46a2",
+                    "name": "up",
+                    "id": "5121d2e4-6867-4ace-945b-f20cd5f76085",
+                    "path": "<Keyboard>/w",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "down",
+                    "id": "34021fb1-f293-4c97-8527-71d1005a4d18",
+                    "path": "<Keyboard>/s",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": true
+                },
+                {
+                    "name": "left",
+                    "id": "0566730b-ecb8-4a78-8d2a-4f62819d45d3",
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
@@ -115,8 +146,8 @@
                     "isPartOfComposite": true
                 },
                 {
-                    "name": "positive",
-                    "id": "a8a61171-ce8f-4b34-b089-57d79e62d01e",
+                    "name": "right",
+                    "id": "23f66535-387c-4060-9d6f-66b6f88ed75f",
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
@@ -182,30 +213,8 @@
                 },
                 {
                     "name": "",
-                    "id": "aafc8a9d-500a-483d-910f-35e55d636524",
-                    "path": "<Keyboard>/n",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Grapple",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "7a64a908-5b5a-468d-88e7-6228f75dd7f4",
-                    "path": "<Gamepad>/rightTrigger",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Grapple",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "cc243af1-c3fe-4a5b-aec3-0505bc648173",
-                    "path": "<Gamepad>/leftStick",
+                    "path": "<Gamepad>/rightStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -214,7 +223,7 @@
                     "isPartOfComposite": false
                 },
                 {
-                    "name": "WASD",
+                    "name": "Arrow Keys",
                     "id": "841222b1-e173-4fa4-abc6-21ea4a5206b1",
                     "path": "2DVector",
                     "interactions": "",
@@ -227,7 +236,7 @@
                 {
                     "name": "up",
                     "id": "2de17bb8-a95b-4659-8370-6917842644de",
-                    "path": "<Keyboard>/w",
+                    "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -238,7 +247,7 @@
                 {
                     "name": "down",
                     "id": "20297993-32da-4a77-adfc-82d27fcbb0f4",
-                    "path": "<Keyboard>/s",
+                    "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -249,7 +258,7 @@
                 {
                     "name": "left",
                     "id": "7ed9a624-889e-4860-8206-05ad59d2e4eb",
-                    "path": "<Keyboard>/a",
+                    "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -260,24 +269,13 @@
                 {
                     "name": "right",
                     "id": "7d02a185-447c-4452-9b18-34323cd56fe1",
-                    "path": "<Keyboard>/d",
+                    "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
                     "action": "Aim",
                     "isComposite": false,
                     "isPartOfComposite": true
-                },
-                {
-                    "name": "",
-                    "id": "22604ab9-a8dd-4384-9c92-92bf74ed2259",
-                    "path": "<Gamepad>/dpad",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Aim",
-                    "isComposite": false,
-                    "isPartOfComposite": false
                 },
                 {
                     "name": "",
@@ -336,8 +334,52 @@
                 },
                 {
                     "name": "",
-                    "id": "ce2a0a65-4a4b-4e15-905c-25719a72562b",
+                    "id": "ee36edbe-68b1-4729-b68b-5542e5a44185",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "0c36832e-07bd-4c16-800d-47e102f44eee",
+                    "path": "<Gamepad>/rightTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "92360a9b-dd45-40b2-81dd-87a78d644f66",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "fb6586a7-300c-4384-9276-fa93a6687a6f",
                     "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Grapple",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "aafc8a9d-500a-483d-910f-35e55d636524",
+                    "path": "<Keyboard>/shift",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
@@ -347,8 +389,8 @@
                 },
                 {
                     "name": "",
-                    "id": "41812d6d-59ec-4ca6-a311-eb256c3bb6b8",
-                    "path": "<Keyboard>/m",
+                    "id": "7a64a908-5b5a-468d-88e7-6228f75dd7f4",
+                    "path": "<Gamepad>/leftShoulder",
                     "interactions": "",
                     "processors": "",
                     "groups": "",

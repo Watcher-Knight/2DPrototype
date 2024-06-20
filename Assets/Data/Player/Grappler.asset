@@ -19,8 +19,9 @@ MonoBehaviour:
   <MinLength>k__BackingField: 1
   <TargetLayer>k__BackingField:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   <SelectionTag>k__BackingField:
     Id: 4
   <DeselectionTag>k__BackingField:
     Id: 5
+  <TargetIcon>k__BackingField: {fileID: 3755931104188356593, guid: 646585d8e31cc4a4cba701e4752496dd, type: 3}

@@ -4,10 +4,12 @@ using UnityEngine;
 [RequireComponent(typeof(DistanceJoint2D))]
 [RequireComponent(typeof(Rigidbody2D))]
 [RequireComponent(typeof(LineRenderer))]
+[RequireComponent(typeof(PlayerAnimator))]
 [AddComponentMenu(ComponentPaths.Grappler)]
 public class GrapplerBehavior : MonoBehaviour
 {
     [SerializeField] private GrapplerData Data;
+    [SerializeField][AutoAssign] private Transform Origin;
 
     public bool CanGrapple => !IsGrappling && TargetCollider != null;
 
@@ -23,9 +25,10 @@ public class GrapplerBehavior : MonoBehaviour
     private bool IsGrappling = false;
     private float ClimbDirection = 0f;
     private float SwingDirection = 0f;
-    private Vector2 AimDirection = Vector2.zero;
+    //private Vector2 AimDirection = Vector2.zero;
     private Collider2D TargetCollider;
     private Vector2 TargetPoint = Vector2.zero;
+    private SpriteRenderer TargetIcon;
 
     private void ChangeTarget(Collider2D newTarget)
     {
@@ -46,8 +49,9 @@ public class GrapplerBehavior : MonoBehaviour
         {
             if (SwingDirection == 0) UpdateClimb();
             DrawLine();
+            AimTowardTarget();
         }
-        CalculateTarget();
+        else CalculateTarget();
 
         if (Rigidbody.IsTouching(Vector2.down, Physics2D.AllLayers)) Cancel();
     }
@@ -68,20 +72,34 @@ public class GrapplerBehavior : MonoBehaviour
     {
         Joint.distance = Mathf.Clamp(Joint.distance + -ClimbDirection * Data.ClimbSpeed * Time.deltaTime, Data.MinLength, Data.MaxLength);
     }
+
     private void DrawLine()
     {
-        Line.SetPosition(0, transform.position);
+        Line.SetPosition(0, Origin.position);
         Line.SetPosition(1, Joint.connectedAnchor);
     }
+
+    private void AimTowardTarget()
+    {
+        PlayerAnimator animator = GetComponent<PlayerAnimator>();
+        animator.Aim(TargetPoint - (Vector2)transform.position);
+    }
+
     private void CalculateTarget()
     {
-        Collider2D newCollider = null;
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, AimDirection, Data.MaxLength, Data.TargetLayer);
-
-        if (hit)
+        Collider2D newCollider;
+        RaycastHit2D hit = Physics2D.Raycast(Origin.position, Origin.right, Data.MaxLength, Data.TargetLayer);
+        if (hit && hit.collider.TryGetComponent(out GrapplePointBehavior _))
         {
             newCollider = hit.collider;
             TargetPoint = hit.point;
+            if (TargetIcon == null) TargetIcon = Instantiate(Data.TargetIcon, TargetPoint, Quaternion.identity);
+            else TargetIcon.transform.position = TargetPoint;
+        }
+        else
+        {
+            newCollider = null;
+            if (TargetIcon != null) Destroy(TargetIcon.gameObject);
         }
         if (TargetCollider != newCollider) ChangeTarget(hit.collider);
     }
@@ -115,19 +133,26 @@ public class GrapplerBehavior : MonoBehaviour
     public void Swing(float direction)
     {
         SwingDirection = direction;
+
+        PlayerAnimator animator = GetComponent<PlayerAnimator>();
+        switch (direction)
+        {
+            case > 0: animator.TurnRight(); break;
+            case < 0: animator.TurnLeft(); break;
+        }
     }
     public void Climb(float direction)
     {
         ClimbDirection = direction;
     }
-    public void Aim(Vector2 direction)
-    {
-        AimDirection = direction;
-    }
+    // public void Aim(Vector2 direction)
+    // {
+    //     AimDirection = direction;
+    // }
     private void OnDrawGizmosSelected()
     {
         if (Data == null) return;
         Gizmos.color = Color.green;
-        Gizmos.DrawLine(transform.position, (Vector2)transform.position + AimDirection * Data.MaxLength);
+        Gizmos.DrawLine(Origin.position, Origin.position + Origin.right * Data.MaxLength);
     }
 }

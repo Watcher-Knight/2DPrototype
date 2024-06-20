@@ -16,7 +16,7 @@ MonoBehaviour:
   <Force>k__BackingField: 100
   <MagnetLayer>k__BackingField:
     serializedVersion: 2
-    m_Bits: 128
+    m_Bits: 64
   <SelectionTag>k__BackingField:
     Id: 4
   <DeselectionTag>k__BackingField:

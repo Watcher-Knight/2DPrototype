@@ -12,7 +12,7 @@ TagManager:
   - Water
   - UI
   - Platform
-  - GrapplePoint
+  - PlayerAttack
   - 
   - 
   - 
@@ -46,4 +46,10 @@ TagManager:
     locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Icon
+    uniqueID: 2274362331
+    locked: 0
+  - name: PlayerArm
+    uniqueID: 1007573685
     locked: 0

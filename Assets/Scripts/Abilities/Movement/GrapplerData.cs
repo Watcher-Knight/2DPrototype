@@ -15,4 +15,5 @@ public class GrapplerData : ScriptableObject
     [field: SerializeField] public LayerMask TargetLayer { get; private set; }
     [field: SerializeField] public EventTag SelectionTag { get; private set; }
     [field: SerializeField] public EventTag DeselectionTag { get; private set; }
+    [field: SerializeField] public SpriteRenderer TargetIcon { get; private set; }
 }
