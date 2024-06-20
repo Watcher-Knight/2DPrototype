@@ -98,6 +98,15 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Dash"",
+                    ""type"": ""Button"",
+                    ""id"": ""be49069d-10af-48ae-86e4-167fa3c4c68f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -419,6 +428,28 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
                     ""action"": ""Magnet"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4327f240-4245-4923-808d-adb8d0968bcc"",
+                    ""path"": ""<Keyboard>/x"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5d63a3e6-3358-4767-9b93-6fff00308073"",
+                    ""path"": ""<Gamepad>/rightShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Dash"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -435,6 +466,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         m_Player_Shoot = m_Player.FindAction("Shoot", throwIfNotFound: true);
         m_Player_Grapple = m_Player.FindAction("Grapple", throwIfNotFound: true);
         m_Player_Magnet = m_Player.FindAction("Magnet", throwIfNotFound: true);
+        m_Player_Dash = m_Player.FindAction("Dash", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -504,6 +536,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Shoot;
     private readonly InputAction m_Player_Grapple;
     private readonly InputAction m_Player_Magnet;
+    private readonly InputAction m_Player_Dash;
     public struct PlayerActions
     {
         private @GameInput m_Wrapper;
@@ -516,6 +549,7 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         public InputAction @Shoot => m_Wrapper.m_Player_Shoot;
         public InputAction @Grapple => m_Wrapper.m_Player_Grapple;
         public InputAction @Magnet => m_Wrapper.m_Player_Magnet;
+        public InputAction @Dash => m_Wrapper.m_Player_Dash;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -549,6 +583,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Magnet.started += instance.OnMagnet;
             @Magnet.performed += instance.OnMagnet;
             @Magnet.canceled += instance.OnMagnet;
+            @Dash.started += instance.OnDash;
+            @Dash.performed += instance.OnDash;
+            @Dash.canceled += instance.OnDash;
         }
 
         private void UnregisterCallbacks(IPlayerActions instance)
@@ -577,6 +614,9 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
             @Magnet.started -= instance.OnMagnet;
             @Magnet.performed -= instance.OnMagnet;
             @Magnet.canceled -= instance.OnMagnet;
+            @Dash.started -= instance.OnDash;
+            @Dash.performed -= instance.OnDash;
+            @Dash.canceled -= instance.OnDash;
         }
 
         public void RemoveCallbacks(IPlayerActions instance)
@@ -604,5 +644,6 @@ public partial class @GameInput: IInputActionCollection2, IDisposable
         void OnShoot(InputAction.CallbackContext context);
         void OnGrapple(InputAction.CallbackContext context);
         void OnMagnet(InputAction.CallbackContext context);
+        void OnDash(InputAction.CallbackContext context);
     }
 }

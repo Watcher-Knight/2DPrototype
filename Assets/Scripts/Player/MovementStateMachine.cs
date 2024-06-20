@@ -8,11 +8,13 @@ public class MovementStateMachine
         MovementState.Crouch => false,
         MovementState.Grapple => false,
         MovementState.Magnet => false,
+        MovementState.Dash => false,
         _ => true
     };
     public bool CanAim => CurrentState switch
     {
         MovementState.Grapple => false,
+        MovementState.Dash => false,
         _ => true
     };
 
@@ -91,6 +93,22 @@ public class MovementStateMachine
         return false;
     }
 
+    public bool ToDash(BoxCollider2D collider, LayerMask platformLayer)
+    {
+        switch (CurrentState)
+        {
+            case MovementState.Default:
+            case MovementState.Crouch:
+                if (IsGrounded(collider, platformLayer))
+                {
+                    CurrentState = MovementState.Dash;
+                    return true;
+                }
+                break;
+        }
+            return false;
+                
+        }
     public void ToDefault() => CurrentState = MovementState.Default;
 }
 
@@ -100,5 +118,6 @@ public enum MovementState
     Jump,
     Crouch,
     Grapple,
-    Magnet
+    Magnet,
+    Dash
 }

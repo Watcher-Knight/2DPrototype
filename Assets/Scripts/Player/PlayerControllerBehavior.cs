@@ -64,7 +64,17 @@ public class PlayerControllerBehavior : MonoBehaviour
         MagnetBehavior magnet = GetComponent<MagnetBehavior>();
         InitializeMagnet(magnet, mover);
 
+        DasherBehaviour dasher = GetComponent<DasherBehaviour>();
+        InitializeDasher(dasher, mover);
+
         InitializeModeSet();
+    }
+
+    private void InitializeDasher(DasherBehaviour dasher, MoverBehavior mover)
+    {
+        Controls.Dash.performed += c => { if (MovementStateMachine.ToDash(Collider, PlatformLayer)) dasher.Dash(); };
+        Controls.Dash.canceled += c => dasher.Cancel();
+        dasher.OnFinish += MovementStateMachine.ToDefault;
     }
 
     private void InitializeMove(MoverBehavior mover)

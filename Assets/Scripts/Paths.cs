@@ -19,6 +19,7 @@ public static class ComponentPaths
     public const string Croucher = Movement + "/Croucher";
     public const string Grappler = Movement + "/Grappler";
     public const string Magnet = Movement + "/Magnet";
+    public const string Dasher = Movement + "/Dasher";
     #endregion
 
     #region Combat
@@ -53,6 +54,7 @@ public static class AssetPaths
     public const string ProjectileData = Data + "/Projectile";
     public const string GrapplerData = Data + "/Grappler";
     public const string MagnetData = Data + "/Magnet";
+    public const string DasherData = Data + "/Dasher";
     public const string PlayerEventHandlerData = Data + "/Player Event Handler";
     #endregion
 }

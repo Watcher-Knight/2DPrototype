@@ -18,11 +18,13 @@ public class PlayerModeStateMachine
     public void ToAttack() => CurrentState = PlayerMode.Attack;
     public void ToMagnet() => CurrentState = PlayerMode.Magnet;
     public void ToGrapple() => CurrentState = PlayerMode.Grapple;
+    public void ToDash() => CurrentState = PlayerMode.Dash;
 }
 
 public enum PlayerMode
 {
     Attack,
     Magnet,
-    Grapple
+    Grapple,
+    Dash
 }
