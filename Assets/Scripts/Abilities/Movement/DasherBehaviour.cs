@@ -22,7 +22,7 @@ public class DasherBehaviour : MonoBehaviour
     }
     public void Update()
     {
-        if (IsDashing && !CanDash) Cancel();
+        if (IsDashing || (IsDashing && !CanDash)) Cancel();
         if(Time.time >= StartTime + holdDurationTime)
         {
             CanDash = true;
