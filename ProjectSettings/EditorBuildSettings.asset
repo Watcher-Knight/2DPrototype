@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Magnet1.unity
     guid: 7c82ba297e5f8854eac1c484935187ed
+  - enabled: 1
+    path: Assets/Scenes/CheckPointManager.unity
+    guid: b7bcc39ba14ad164fbb9649e0ed95801
   m_configObjects: {}
