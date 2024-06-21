@@ -54,5 +54,6 @@ public static class AssetPaths
     public const string GrapplerData = Data + "/Grappler";
     public const string MagnetData = Data + "/Magnet";
     public const string PlayerEventHandlerData = Data + "/Player Event Handler";
+    public const string CheckPointData = Data + "/CheckPoint";
     #endregion
 }
