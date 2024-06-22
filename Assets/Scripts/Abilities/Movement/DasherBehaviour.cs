@@ -58,7 +58,13 @@ public class DasherBehaviour : MonoBehaviour
     private void StartDash()
     {
         IsDashing = true;
-        Direction = PlayerAnimator.AimDirection.x > 0 ? transform.right : -transform.right;
+        if (PlayerAnimator.AimDirection != Vector2.zero)
+        {
+            Direction = PlayerAnimator.AimDirection.x >= 0 ? transform.right : -transform.right;
+        } else
+        {
+            Direction = new Vector2(PlayerAnimator.BodyDirection, 0f);
+        }
         if (Data.ShowTrail)
         {
             TrailRenderer.emitting = true;
