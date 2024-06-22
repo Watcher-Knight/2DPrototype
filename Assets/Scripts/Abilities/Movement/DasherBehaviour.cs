@@ -15,7 +15,6 @@ public class DasherBehaviour : MonoBehaviour
     public Action OnFinish;
     private Rigidbody2D Rigidbody;
     private bool IsDashing = false;
-    private Vector2 Direction;
 
     private float Timer = 0f;
     private float LastDashTime = Mathf.NegativeInfinity;
@@ -33,7 +32,7 @@ public class DasherBehaviour : MonoBehaviour
             Timer += Time.deltaTime;
             if (Timer < Data.DashDuration)
             {
-                Rigidbody.velocity = Direction * (Data.DashDistance / Data.DashDuration);
+                Rigidbody.velocity = new Vector2(PlayerAnimator.BodyDirection * (Data.DashDistance / Data.DashDuration), 0f);
             } else
             {
                 EndDash();
@@ -58,13 +57,6 @@ public class DasherBehaviour : MonoBehaviour
     private void StartDash()
     {
         IsDashing = true;
-        if (PlayerAnimator.AimDirection != Vector2.zero)
-        {
-            Direction = PlayerAnimator.AimDirection.x >= 0 ? transform.right : -transform.right;
-        } else
-        {
-            Direction = new Vector2(PlayerAnimator.BodyDirection, 0f);
-        }
         if (Data.ShowTrail)
         {
             TrailRenderer.emitting = true;
