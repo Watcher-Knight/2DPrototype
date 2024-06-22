@@ -5,6 +5,7 @@ public class MovementStateMachine
 {
     public bool CanMove => CurrentState switch
     {
+        MovementState.Dash => false,
         MovementState.Crouch => false,
         MovementState.Grapple => false,
         MovementState.Magnet => false,
@@ -12,6 +13,7 @@ public class MovementStateMachine
     };
     public bool CanAim => CurrentState switch
     {
+        MovementState.Dash => false,
         MovementState.Grapple => false,
         _ => true
     };
@@ -19,13 +21,13 @@ public class MovementStateMachine
     private bool IsGrounded(BoxCollider2D collider, LayerMask platformLayer) =>
         collider.IsTouching(Vector2.down, platformLayer);
 
-    private MovementState b_CurrentSTate = MovementState.Default;
+    private MovementState b_CurrentState = MovementState.Default;
     public MovementState CurrentState
     {
-        get => b_CurrentSTate;
+        get => b_CurrentState;
         private set
         {
-            b_CurrentSTate = value;
+            b_CurrentState = value;
             if (CanMove) OnMovementEnabled?.Invoke();
             OnStateChange?.Invoke(value);
         }
@@ -64,6 +66,21 @@ public class MovementStateMachine
         }
         return false;
     }
+ 
+    public bool ToDash()
+    {
+        switch (CurrentState)
+        {
+            case MovementState.Default:
+            case MovementState.Jump:
+            case MovementState.Crouch:
+                CurrentState = MovementState.Dash;
+                return true;
+            default:
+                return false;
+        }
+    }
+
     public bool ToGrapple(BoxCollider2D collider, LayerMask platformLayer)
     {
         switch (CurrentState)
@@ -99,6 +116,7 @@ public enum MovementState
     Default,
     Jump,
     Crouch,
+    Dash,
     Grapple,
     Magnet
 }

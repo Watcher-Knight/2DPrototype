@@ -17,6 +17,7 @@ public static class ComponentPaths
     public const string Mover = Movement + "/Mover";
     public const string Jumper = Movement + "/Jumper";
     public const string Croucher = Movement + "/Croucher";
+    public const string Dasher = Movement + "/Dasher";
     public const string Grappler = Movement + "/Grappler";
     public const string Magnet = Movement + "/Magnet";
     #endregion
@@ -49,6 +50,7 @@ public static class AssetPaths
     public const string MoverData = Data + "/Mover";
     public const string JumperData = Data + "/Jumper";
     public const string CroucherData = Data + "/Croucher";
+    public const string DasherData = Data + "/Dasher";
     public const string ShooterData = Data + "/Shooter";
     public const string ProjectileData = Data + "/Projectile";
     public const string GrapplerData = Data + "/Grappler";

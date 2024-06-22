@@ -55,6 +55,9 @@ public class PlayerControllerBehavior : MonoBehaviour
         // CroucherBehavior croucher = GetComponent<CroucherBehavior>();
         // InitializeCrouch(croucher);
 
+        DasherBehaviour dasher = GetComponent<DasherBehaviour>();
+        InitializeDash(dasher);
+
         ShooterBehavior shooter = GetComponent<ShooterBehavior>();
         InitializeShoot(shooter);
 
@@ -87,6 +90,12 @@ public class PlayerControllerBehavior : MonoBehaviour
         Controls.Crouch.performed += c => { if (MovementStateMachine.ToCrouch(Collider, PlatformLayer)) croucher.Crouch(); };
         Controls.Crouch.canceled += c => croucher.Cancel();
         croucher.OnFinish += MovementStateMachine.ToDefault;
+    }
+
+    private void InitializeDash(DasherBehaviour dasher)
+    {
+        Controls.Dash.performed += c => { if (MovementStateMachine.ToDash()) dasher.Dash(); };
+        dasher.OnFinish += MovementStateMachine.ToDefault;
     }
 
     private void InitializeShoot(ShooterBehavior shooter)

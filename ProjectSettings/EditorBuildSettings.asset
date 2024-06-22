@@ -17,4 +17,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Magnet1.unity
     guid: 7c82ba297e5f8854eac1c484935187ed
+  - enabled: 1
+    path: Assets/Scenes/Dasher1.unity
+    guid: f176a0b18b0ef3345a6ee63a083ed30a
   m_configObjects: {}
