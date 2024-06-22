@@ -1,6 +1,4 @@
 using System;
-using System.Collections;
-using Unity.Plastic.Newtonsoft.Json.Bson;
 using UnityEngine;
 
 [RequireComponent(typeof(Rigidbody2D))]
